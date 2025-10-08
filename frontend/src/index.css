@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+.homepage_bg{
+    background-image: url("./assets/Images/bghome.svg");
+}
+.bghome{
+    background-image: url("..");
+}
+
+/* global.css ya specific modal component ke liye */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

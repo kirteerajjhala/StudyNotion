@@ -8,8 +8,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const cookie = require('cookie');
 const mailSender = require('../utils/mailSender');
-const otpTemplate = require('../mail/templates/emailVerificationTemplate');
-const { passwordUpdated } = require("../mail/templates/passwordUpdate");
+const otpTemplate = require('../Mail/templates/emailVerificationTemplate');
+const { passwordUpdated } = require("../Mail/templates/passwordUpdate");
 
 // ================ SEND-OTP For Email Verification ================
 exports.sendOTP = async (req, res) => {

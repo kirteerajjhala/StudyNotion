@@ -98,7 +98,7 @@ export function login(email, password, navigate) {
       console.log("LOGIN API RESPONSE............", response);
 
       if (!response.data.success) {
-        throw new Error(response.data.message)
+        throw new Error(response.message)
       }
 
       toast.success("Login Successful")

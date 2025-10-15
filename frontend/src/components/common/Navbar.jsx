@@ -63,7 +63,7 @@ const Navbar = () => {
     }
 console.log("sublinks in navbar" , subLinks )
     return (
-        <nav className={`fixed top-0 z-50 w-full bg-gray-900 transition-transform duration-300  shadow-md`}>
+        <nav className={`fixed top-0 z-50 w-full bg-gray-950 transition-transform duration-300  shadow-md`}>
             <div className='flex w-11/12 max-w-7xl mx-auto items-center justify-between h-16'>
                 
                 {/* Logo */}

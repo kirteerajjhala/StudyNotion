@@ -62,7 +62,7 @@ const CodeBlock = ({
                 <div
                     className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-1`}
                 >
-                     <div className={`${backgroundGradient}`}></div>
+                     <div className={`${backgroundGradient} bg-amber-800`}></div>
 
                     {/* <TypeAnimation
                         sequence={[codeblock, 1000, ""]}

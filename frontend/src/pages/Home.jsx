@@ -117,6 +117,7 @@ const Home = () => {
           }}
           codeblock={`<!DOCTYPE html>\n<html>\n<head><title>Example</title></head>\n<body>\n<h1><a href="/">Header</a></h1>\n<nav><a href="one/">One</a><a href="two/">Two</a><a href="three/">Three</a></nav>`}
           codeColor="text-yellow-400"
+          backgroundGradient={"bg-red-700"}
         />
 
         {/* Code Block 2 */}

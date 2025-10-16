@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { Link, matchPath, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { NavbarLinks } from "../../../data/navbar-links"
-import studyNotionLogo from '../../assets/Logo/Logo-Full-Light.png'
-import { apiConnector } from '../../services/apiConnector'
-import { categories } from '../../services/api'
+import { NavbarLinks } from "../../../data/navbar-links";
+import studyNotionLogo from '../../assets/Logo/Logo-Full-Light.png';
+import { apiConnector } from '../../services/apiConnector';
+import { categories } from '../../services/api';
 
-import ProfileDropDown from '../core/Auth/ProfileDropDown'
-import MobileProfileDropDown from '../core/Auth/MobileProfileDropDown'
+import ProfileDropDown from '../core/Auth/ProfileDropDown';
+import MobileProfileDropDown from '../core/Auth/MobileProfileDropDown';
 
-import { AiOutlineShoppingCart, AiOutlineMenu } from "react-icons/ai"
-import { MdKeyboardArrowDown } from "react-icons/md"
+import { AiOutlineShoppingCart, AiOutlineMenu } from "react-icons/ai";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Navbar = () => {
     const { token } = useSelector((state) => state.auth);
@@ -22,6 +22,7 @@ const Navbar = () => {
     const [subLinks, setSubLinks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
 
     // Scroll effect
     const [showNavbar, setShowNavbar] = useState('top');
@@ -45,7 +46,6 @@ const Navbar = () => {
         try {
             setLoading(true);
             const result = await apiConnector("GET", categories.CATEGORIES_API);
-            
             setSubLinks(result.data.data);
         } catch (error) {
             console.log("Could not fetch categories", error);
@@ -59,16 +59,21 @@ const Navbar = () => {
 
     // Match route for active links
     const matchRoute = (route) => {
-        return matchPath({ path: route }, location.pathname);
+        if (!route) return false;
+        const pathname = location.pathname;
+        const match = route.includes(':')
+            ? pathname.startsWith(route.split('/:')[0])
+            : pathname === route;
+        return match;
     }
-console.log("sublinks in navbar" , subLinks )
+
     return (
-        <nav className={`fixed top-0 z-50 w-full bg-gray-950 transition-transform duration-300  shadow-md`}>
+        <nav className={`fixed top-0 z-50 w-full bg-gray-900 transition-transform duration-300 shadow-md ${showNavbar === 'hide' ? '-translate-y-full' : 'translate-y-0'}`}>
             <div className='flex w-11/12 max-w-7xl mx-auto items-center justify-between h-16'>
-                
+
                 {/* Logo */}
                 <Link to="/">
-                    <img src={studyNotionLogo} alt="Logo" className="w-40 h-auto" />
+                    <img src={studyNotionLogo} alt="Logo" className="w-28 sm:w-40 h-auto" /> {/* Mobile smaller */}
                 </Link>
 
                 {/* Desktop Links */}
@@ -98,7 +103,7 @@ console.log("sublinks in navbar" , subLinks )
                                     </div>
                                 </div>
                             ) : (
-                                <Link to={link.path}>
+                                <Link to={link.path || '#'}>
                                     <p className={`px-3 py-1 rounded-md transition-colors duration-200 ${matchRoute(link.path) ? 'bg-yellow-400 text-gray-900' : 'hover:bg-gray-700 hover:text-white'}`}>
                                         {link.title}
                                     </p>
@@ -121,21 +126,6 @@ console.log("sublinks in navbar" , subLinks )
                         </Link>
                     )}
 
-                    {!token && (
-                        <>
-                            <Link to="/login">
-                                <button className={`px-3 py-1 rounded-md border ${matchRoute('/login') ? 'border-yellow-400 bg-yellow-400 text-gray-900' : 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white'} transition-colors duration-200`}>
-                                    Log In
-                                </button>
-                            </Link>
-                            <Link to="/signup">
-                                <button className={`px-3 py-1 rounded-md border ${matchRoute('/signup') ? 'border-yellow-400 bg-yellow-400 text-gray-900' : 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white'} transition-colors duration-200`}>
-                                    Sign Up
-                                </button>
-                            </Link>
-                        </>
-                    )}
-
                     {token && <ProfileDropDown />}
                     {token && <MobileProfileDropDown />}
 
@@ -151,17 +141,65 @@ console.log("sublinks in navbar" , subLinks )
                 <ul className='sm:hidden bg-gray-800 text-gray-200 flex flex-col gap-2 p-4'>
                     {NavbarLinks.map((link, index) => (
                         <li key={index}>
-                            <Link to={link.path} onClick={() => setMobileMenuOpen(false)}>
-                                <p className={`px-3 py-2 rounded-md ${matchRoute(link.path) ? 'bg-yellow-400 text-gray-900' : 'hover:bg-gray-700'}`}>
-                                    {link.title}
-                                </p>
-                            </Link>
+                            {link.title === "Catalog" ? (
+                                <>
+                                    <div
+                                        onClick={() => setMobileCatalogOpen(prev => !prev)}
+                                        className={`flex justify-between items-center px-3 py-2 rounded-md cursor-pointer ${mobileCatalogOpen ? 'bg-yellow-400 text-gray-900' : 'hover:bg-gray-700'}`}
+                                    >
+                                        <span>{link.title}</span>
+                                        <MdKeyboardArrowDown className={`transition-transform ${mobileCatalogOpen ? 'rotate-180' : ''}`} />
+                                    </div>
+                                    {mobileCatalogOpen && (
+                                        <div className="flex flex-col pl-4 mt-2">
+                                            {loading ? (
+                                                <p className="text-gray-300 py-2">Loading...</p>
+                                            ) : subLinks.length ? (
+                                                subLinks.map((subLink, i) => (
+                                                    <Link
+                                                        to={`/catalog/${subLink.name.split(" ").join("-").toLowerCase()}`}
+                                                        key={i}
+                                                        className="py-2 px-2 rounded hover:bg-gray-700"
+                                                        onClick={() => setMobileMenuOpen(false)}
+                                                    >
+                                                        {subLink.name}
+                                                    </Link>
+                                                ))
+                                            ) : (
+                                                <p className="text-gray-300 py-2">No Courses Found</p>
+                                            )}
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <Link to={link.path || '#'} onClick={() => setMobileMenuOpen(false)}>
+                                    <p className={`px-3 py-2 rounded-md ${matchRoute(link.path) ? 'bg-yellow-400 text-gray-900' : 'hover:bg-gray-700'}`}>
+                                        {link.title}
+                                    </p>
+                                </Link>
+                            )}
                         </li>
                     ))}
+
+                    {/* Login & Signup for Mobile */}
+                    {!token && (
+                        <div className="mt-2 flex flex-col gap-2">
+                            <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
+                                <button className="w-full px-3 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                    Log In
+                                </button>
+                            </Link>
+                            <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                                <button className="w-full px-3 py-2 rounded-md border border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white">
+                                    Sign Up
+                                </button>
+                            </Link>
+                        </div>
+                    )}
                 </ul>
             )}
         </nav>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

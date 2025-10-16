@@ -62,7 +62,7 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       {openSideMenu && (
-        <div className="flex h-[calc(100vh-3.5rem)] min-w-[222px] flex-col border-r-[1px] border-gray-700 bg-gray-800 py-10">
+        <div className="flex min-h-full mt-15 min-w-[222px] flex-col border-r-[1px] border-gray-700 bg-gray-800 py-10">
           <div className="flex flex-col mt-6">
             {sidebarLinks.map((link) => {
               if (link.type && user?.accountType !== link.type) return null;

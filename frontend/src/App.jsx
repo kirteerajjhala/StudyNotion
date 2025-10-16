@@ -44,17 +44,14 @@ function App() {
   const { user } = useSelector((state) => state.profile);
   const location = useLocation();
 
-  // Scroll to top when path changes
+  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // Scroll-to-top button visibility
+  // Scroll-to-top button
   const [showArrow, setShowArrow] = useState(false);
-
-  const handleArrow = () => {
-    setShowArrow(window.scrollY > 500);
-  };
+  const handleArrow = () => setShowArrow(window.scrollY > 500);
 
   useEffect(() => {
     window.addEventListener("scroll", handleArrow);
@@ -62,126 +59,81 @@ function App() {
   }, []);
 
   return (
-    <div className=" min-h-screen bg-gray-950 flex flex-col font-sans text-white">
+    <div className="min-h-screen  flex flex-col bg-gray-900 pt-15 text-white font-sans overflow-x-hidden">
       <Navbar />
 
-      {/* Scroll to top arrow */}
+      {/* Scroll to top button */}
       <button
-        onClick={() => window.scrollTo(0, 0)}
-        className={`bg-yellow-400 hover:bg-yellow-500 hover:scale-110 p-3 text-lg text-black rounded-2xl fixed right-3 z-10 transition-all duration-500 ease-in-out ${
-          showArrow ? "bottom-6" : "-bottom-24"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className={`bg-yellow-400 hover:bg-yellow-500 hover:scale-110 p-3 sm:p-4 text-base sm:text-lg md:text-xl text-black rounded-full fixed right-4 sm:right-6 z-50 shadow-lg transition-all duration-500 ease-in-out ${
+          showArrow ? "bottom-6" : "-bottom-20"
         }`}
+        aria-label="Scroll to top"
       >
         <HiArrowNarrowUp />
       </button>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="catalog/:catalogName" element={<Catalog />} />
-        <Route path="courses/:courseId" element={<CourseDetails />} />
+      {/* Main content with responsive padding */}
+      <div className="">
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="catalog/:catalogName" element={<Catalog />} />
+          <Route path="courses/:courseId" element={<CourseDetails />} />
 
-        {/* Open Routes (Only Non-Logged Users) */}
-        <Route
-          path="signup"
-          element={
-            <OpenRoute>
-              <Signup />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="login"
-          element={
-            <OpenRoute>
-              <Login />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="forgot-password"
-          element={
-            <OpenRoute>
-              <ForgotPassword />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="verify-email"
-          element={
-            <OpenRoute>
-              <VerifyEmail />
-            </OpenRoute>
-          }
-        />
-        <Route
-          path="update-password/:id"
-          element={
-            <OpenRoute>
-              <UpdatePassword />
-            </OpenRoute>
-          }
-        />
+          {/* Open Routes */}
+          <Route path="signup" element={<OpenRoute><Signup /></OpenRoute>} />
+          <Route path="login" element={<OpenRoute><Login /></OpenRoute>} />
+          <Route path="forgot-password" element={<OpenRoute><ForgotPassword /></OpenRoute>} />
+          <Route path="verify-email" element={<OpenRoute><VerifyEmail /></OpenRoute>} />
+          <Route path="update-password/:id" element={<OpenRoute><UpdatePassword /></OpenRoute>} />
 
-        {/* Protected Routes */}
-        <Route
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
-          <Route path="dashboard/settings" element={<Settings />} />
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
+            <Route path="dashboard/my-profile" element={<MyProfile />} />
+            <Route path="dashboard/settings" element={<Settings />} />
 
-          {/* Admin Routes */}
-          {user?.accountType === ACCOUNT_TYPE.ADMIN && (
-            <>
-              <Route path="dashboard/create-category" element={<CreateCategory />} />
-              <Route path="dashboard/all-students" element={<AllStudents />} />
-              <Route path="dashboard/all-instructors" element={<AllInstructors />} />
-            </>
-          )}
+            {/* Admin */}
+            {user?.accountType === ACCOUNT_TYPE.ADMIN && (
+              <>
+                <Route path="dashboard/create-category" element={<CreateCategory />} />
+                <Route path="dashboard/all-students" element={<AllStudents />} />
+                <Route path="dashboard/all-instructors" element={<AllInstructors />} />
+              </>
+            )}
 
-          {/* Student Routes */}
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <>
-              <Route path="dashboard/cart" element={<Cart />} />
-              <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
-            </>
-          )}
+            {/* Student */}
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <>
+                <Route path="dashboard/cart" element={<Cart />} />
+                <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+              </>
+            )}
 
-          {/* Instructor Routes */}
-          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-            <>
-              <Route path="dashboard/instructor" element={<Instructor />} />
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
-              <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
-            </>
-          )}
-        </Route>
+            {/* Instructor */}
+            {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+              <>
+                <Route path="dashboard/instructor" element={<Instructor />} />
+                <Route path="dashboard/add-course" element={<AddCourse />} />
+                <Route path="dashboard/my-courses" element={<MyCourses />} />
+                <Route path="dashboard/edit-course/:courseId" element={<EditCourse />} />
+              </>
+            )}
+          </Route>
 
-        {/* Course Watching (for students) */}
-        <Route
-          element={
-            <ProtectedRoute>
-              <ViewCourse />
-            </ProtectedRoute>
-          }
-        >
-          {user?.accountType === ACCOUNT_TYPE.STUDENT && (
-            <Route
-              path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId"
-              element={<VideoDetails />}
-            />
-          )}
-        </Route>
+          {/* View Course */}
+          <Route element={<ProtectedRoute><ViewCourse /></ProtectedRoute>}>
+            {user?.accountType === ACCOUNT_TYPE.STUDENT && (
+              <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element={<VideoDetails />} />
+            )}
+          </Route>
 
-        {/* 404 Page */}
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+          {/* 404 */}
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </div>
     </div>
   );
 }

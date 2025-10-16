@@ -74,7 +74,7 @@ export default function Instructor() {
   );
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 mt-20 ">
       {/* Greeting */}
       <div className="space-y-2">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-100 text-center sm:text-left">

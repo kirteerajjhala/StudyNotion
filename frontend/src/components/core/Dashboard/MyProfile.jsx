@@ -17,7 +17,7 @@ export default function MyProfile() {
   }, []);
 
   return (
-<div className="flex w-full lg:justify-center">
+<div className="flex w-full mt-20 lg:justify-center">
 
   
       <div  className="w-full">

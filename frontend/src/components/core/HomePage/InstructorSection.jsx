@@ -12,7 +12,7 @@ import Img from './../../common/Img';
 const InstructorSection = () => {
   return (
     <div>
-      <div className='flex flex-col lg:flex-row gap-10 lg:gap-20 justify-center items-center'>
+      <div className='flex flex-col lg:flex-row gap-10 lg:gap-20 justify-center items-center '>
 
         <div
           className='lg:w-[40%] w-[60%] '>

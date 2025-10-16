@@ -11,7 +11,7 @@ const CourseCard = ({ cardData, currentCard, setCurrentCard }) => {
       className={`w-[360px] lg:w-[30%] ${currentCard === cardData?.heading
         ? "bg-white shadow-[12px_12px_0_0] shadow-yellow-400"
         : "bg-[#161D29]"
-        }  text-white h-[300px] box-border cursor-pointer`}
+        }  text-white h-[300px] box-border cursor-pointer px-5 md:px-0`}
       onClick={() => setCurrentCard(cardData?.heading)}
     >
       <div className="border-b-[2px] border-[#6E727F] border-dashed h-[80%] p-6 flex flex-col gap-3">

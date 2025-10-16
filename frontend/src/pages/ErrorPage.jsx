@@ -28,7 +28,7 @@ const PageNotFound = () => {
         {/* Home Button */}
         <Link
           to="/"
-          className="inline-block bg-caribbeangreen-200 hover:bg-caribbeangreen-400 text-white font-semibold py-3 px-8 rounded-full transition duration-300 text-lg"
+          className="inline-block bg-green-400 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full transition duration-300 text-lg"
         >
           Go to Home
         </Link>

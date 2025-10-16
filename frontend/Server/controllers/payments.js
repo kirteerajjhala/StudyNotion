@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const User = require('../models/user');
 const Course = require('../models/course');
-const CourseProgress = require("../models/courseProgress")
+const CourseProgress = require("../models/courseProgess")
 
 
 const { default: mongoose } = require('mongoose')

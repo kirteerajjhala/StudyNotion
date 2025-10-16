@@ -1,38 +1,37 @@
 import React from "react"
-
 import Footer from "../components/common/Footer"
 import ContactDetails from "../components/core/ContactPage/ContactDetails"
 import ContactForm from "../components/core/ContactPage/ContactForm"
 import ReviewSlider from './../components/common/ReviewSlider';
 import Navbar from "../components/common/Navbar";
 
-
-
 const Contact = () => {
   return (
-    <div>
+    <div className="bg-gray-900 text-white overflow-x-hidden">
       <Navbar/>
-      <div className="mx-auto mt-30 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
+
+      {/* Contact Section */}
+      <div className="mx-auto mt-16 sm:mt-20 flex flex-col lg:flex-row w-11/12 max-w-7xl justify-between gap-10">
         {/* Contact Details */}
-        <div className="lg:w-[40%]">
+        <div className="w-full lg:w-[40%]">
           <ContactDetails />
         </div>
 
         {/* Contact Form */}
-        <div className="lg:w-[60%]">
+        <div className="w-full lg:w-[60%]">
           <ContactForm />
         </div>
       </div>
 
-      {/* Reviws from Other Learner */}
-      <div className=" my-20 px-5 text-white ">
-        <h1 className="text-center text-4xl font-semibold mt-8">
+      {/* Reviews Section */}
+      <div className="my-16 sm:my-20 px-4 sm:px-6 lg:px-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-8">
           Reviews from other learners
         </h1>
         <ReviewSlider />
       </div>
 
-      {/* footer */}
+      {/* Footer */}
       <Footer />
     </div>
   )

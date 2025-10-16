@@ -36,7 +36,7 @@ export default function EditCourse() {
   if (loading) return <Loading />;
 
   return (
-    <div className="flex w-full flex-col lg:flex-row items-start gap-x-6">
+    <div className="flex w-full flex-col lg:flex-row items-start gap-x-6 ">
       <div className="flex flex-1 flex-col">
         <h1 className="mb-14 text-3xl font-medium text-gray-100 text-center sm:text-left">
           Edit Course

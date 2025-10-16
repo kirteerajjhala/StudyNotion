@@ -53,7 +53,7 @@ function Catalog() {
 
   if (!loading && !catalogPageData) {
     return (
-      <div className="text-white text-2xl sm:text-4xl flex justify-center items-center mt-40">
+      <div className="text-white text-lg sm:text-2xl md:text-3xl flex justify-center items-center mt-40 px-4 text-center">
         No Courses found for selected Category
       </div>
     )
@@ -62,32 +62,32 @@ function Catalog() {
   return (
     <>
       {/* Hero Section */}
-      <div className="bg-gray-900 px-4">
+      <div className="bg-gray-900 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto flex min-h-[260px] max-w-7xl flex-col justify-center gap-4 py-8 lg:py-12">
-          <p className="text-sm text-gray-400">
+          <p className="text-xs sm:text-sm md:text-base text-gray-400">
             Home / Catalog / <span className="text-yellow-400">{catalogPageData?.selectedCategory?.name}</span>
           </p>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl text-white font-semibold">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-semibold">
             {catalogPageData?.selectedCategory?.name}
           </h1>
-          <p className="max-w-2xl text-gray-300">
+          <p className="max-w-2xl text-gray-300 text-sm sm:text-base md:text-lg">
             {catalogPageData?.selectedCategory?.description}
           </p>
         </div>
       </div>
 
       {/* Section 1 */}
-      <div className="mx-auto w-full max-w-7xl px-4 py-12">
-        <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4">Courses to get you started</h2>
-        <div className="flex border-b border-gray-700 text-sm mb-6">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4">Courses to get you started</h2>
+        <div className="flex border-b border-gray-700 text-sm sm:text-base mb-6 overflow-x-auto">
           <p
-            className={`px-4 py-2 ${active === 1 ? "border-b-2 border-yellow-400 text-yellow-400" : "text-gray-100"} cursor-pointer`}
+            className={`px-4 py-2 flex-shrink-0 ${active === 1 ? "border-b-2 border-yellow-400 text-yellow-400" : "text-gray-100"} cursor-pointer`}
             onClick={() => setActive(1)}
           >
             Most Popular
           </p>
           <p
-            className={`px-4 py-2 ${active === 2 ? "border-b-2 border-yellow-400 text-yellow-400" : "text-gray-100"} cursor-pointer`}
+            className={`px-4 py-2 flex-shrink-0 ${active === 2 ? "border-b-2 border-yellow-400 text-yellow-400" : "text-gray-100"} cursor-pointer`}
             onClick={() => setActive(2)}
           >
             New
@@ -97,19 +97,19 @@ function Catalog() {
       </div>
 
       {/* Section 2 */}
-      <div className="mx-auto w-full max-w-7xl px-4 py-12">
-        <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-4">
           Top courses in {catalogPageData?.differentCategory?.name}
         </h2>
         <Course_Slider Courses={catalogPageData?.differentCategory?.courses} />
       </div>
 
       {/* Section 3 */}
-      <div className="mx-auto w-full max-w-7xl px-4 py-12">
-        <h2 className="text-xl sm:text-2xl font-semibold text-white mb-8">Frequently Bought</h2>
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-6">Frequently Bought</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
           {catalogPageData?.mostSellingCourses?.slice(0, 4).map((course, i) => (
-            <Course_Card course={course} key={i} Height="h-72" />
+            <Course_Card course={course} key={i} Height="h-64 sm:h-72" />
           ))}
         </div>
       </div>

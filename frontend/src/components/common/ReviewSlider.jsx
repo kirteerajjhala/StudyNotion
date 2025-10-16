@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react"
 import Img from "./Img"
-
-// Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
+import { Autoplay, Pagination, Navigation } from "swiper/modules"
+
+// ✅ Import necessary Swiper CSS
 import "swiper/css"
-import "swiper/css/free-mode"
 import "swiper/css/pagination"
+import "swiper/css/navigation"
 
-// Icons
 import { FaStar } from "react-icons/fa"
-
-// API
 import { apiConnector } from "../../services/apiConnector"
 import { ratingsEndpoints } from "../../services/api"
 
@@ -37,23 +35,30 @@ function ReviewSlider() {
   if (!reviews || reviews.length === 0) return null
 
   return (
-    <div className="text-white py-8">
+    <div className="text-white py-10 w-full  bg-[#0f172a]">
       <div className="max-w-[1200px] mx-auto px-4">
         <Swiper
+          modules={[Autoplay, Pagination, Navigation]} // ✅ Autoplay enabled
+          spaceBetween={25}
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{ clickable: true }}
+          navigation={true}
           breakpoints={{
+            320: { slidesPerView: 1 },
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
             1280: { slidesPerView: 4 },
           }}
-          spaceBetween={20}
-          loop={true}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
           className="w-full"
         >
           {reviews.map((review, i) => (
             <SwiperSlide key={i}>
-              <div className="flex flex-col gap-3 bg-gray-900 p-4 rounded-lg shadow-md min-h-[180px]">
+              <div className="flex flex-col gap-3 bg-[#1e293b] p-5 rounded-2xl shadow-lg transition-all duration-300 hover:scale-[1.02] min-h-[180px]">
                 {/* User Info */}
                 <div className="flex items-center gap-3">
                   <Img
@@ -65,31 +70,39 @@ function ReviewSlider() {
                     className="h-10 w-10 rounded-full object-cover"
                   />
                   <div className="flex flex-col">
-                    <h3 className="font-semibold text-white capitalize">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h3>
-                    <p className="text-xs text-gray-400">{review?.course?.courseName}</p>
+                    <h3 className="font-semibold text-white capitalize">
+                      {`${review?.user?.firstName} ${review?.user?.lastName}`}
+                    </h3>
+                    <p className="text-xs text-gray-400">
+                      {review?.course?.courseName}
+                    </p>
                   </div>
                 </div>
 
                 {/* Review Text */}
-                <p className="text-gray-200 text-sm">
+                <p className="text-gray-300 text-sm">
                   {review?.review.split(" ").length > truncateWords
-                    ? `${review?.review.split(" ").slice(0, truncateWords).join(" ")} ...`
+                    ? `${review?.review
+                        .split(" ")
+                        .slice(0, truncateWords)
+                        .join(" ")} ...`
                     : review?.review}
                 </p>
 
                 {/* Rating */}
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-yellow-400">{review.rating}</span>
+                <div className="flex items-center gap-2 mt-auto">
+                  <span className="font-semibold text-yellow-400">
+                    {review.rating}
+                  </span>
                   <div className="flex gap-1">
-
                     {Array.from({ length: 5 }).map((_, idx) => (
                       <FaStar
                         key={idx}
-                        size={18}
+                        size={16}
                         className={
                           idx < Math.round(review.rating)
                             ? "text-yellow-400"
-                            : "text-gray-500"
+                            : "text-gray-600"
                         }
                       />
                     ))}

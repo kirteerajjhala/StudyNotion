@@ -13,13 +13,13 @@ function Course_Card({ course, Height }) {
   }, [course])
 
   return (
-    <div className="hover:scale-105 transition-transform duration-200 z-50">
+    <div className="hover:scale-105 transition-transform duration-200 ">
       <Link to={`/courses/${course._id}`}>
         <div className="rounded-lg overflow-hidden bg-gray-800">
           <Img
             src={course?.thumbnail}
             alt="course thumbnail"
-            className={`${Height} w-full object-cover rounded-t-lg`}
+            className={`${Height} w-full object-cover object-center rounded-t-lg`}
           />
           <div className="flex flex-col gap-2 px-3 py-4">
             <p className="text-lg sm:text-xl font-semibold text-white">{course?.courseName}</p>

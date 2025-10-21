@@ -64,7 +64,7 @@ function SignupForm() {
   ];
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-4 bg-gray-900">
+    <div className="flex justify-center items-center min-h-screen px-4 bg-gray-900 mt-16">
       <div className="w-full max-w-4xl lg:w-[50%] p-6 sm:p-10 bg-gray-900 rounded-lg shadow-lg">
         {/* Tab */}
         <Tab tabData={tabData} field={accountType} setField={setAccountType} />

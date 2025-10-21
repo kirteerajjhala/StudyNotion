@@ -30,7 +30,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-900 px-4">
+    <div className="flex justify-center items-center min-h-screen bg-gray-900 px-4 mt-16">
       <form
         onSubmit={handleOnSubmit}
         className="w-full max-w-md sm:max-w-lg p-6 sm:p-10 bg-gray-800 rounded-lg shadow-lg flex flex-col gap-4"

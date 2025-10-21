@@ -19,7 +19,7 @@ import NavBar from '../components/common/Navbar'
 
 const About = () => {
   return (
-    <div className="bg-gray-900 text-white overflow-x-hidden">
+    <div className="bg-gray-900 text-white overflow-x-hidden mt-16">
       <NavBar/>
 
       {/* Hero Section */}

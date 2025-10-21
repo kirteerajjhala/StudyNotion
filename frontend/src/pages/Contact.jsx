@@ -7,7 +7,7 @@ import Navbar from "../components/common/Navbar";
 
 const Contact = () => {
   return (
-    <div className="bg-gray-900 text-white overflow-x-hidden">
+    <div className="bg-gray-900 text-white overflow-x-hidden mt-16">
       <Navbar/>
 
       {/* Contact Section */}

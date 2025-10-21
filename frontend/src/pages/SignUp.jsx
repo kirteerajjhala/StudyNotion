@@ -65,7 +65,7 @@ function SignupForm() {
 
   return (
     <div className="flex justify-center items-center min-h-screen px-4 bg-gray-900 mt-16">
-      <div className="w-full max-w-4xl lg:w-[50%] p-6 sm:p-10 bg-gray-900 rounded-lg shadow-lg">
+      <div className="w-full max-w-4xl lg:w-[50%] p-6 sm:p-10 bg-gray-800 rounded-lg shadow-lg">
         {/* Tab */}
         <Tab tabData={tabData} field={accountType} setField={setAccountType} />
 
@@ -84,7 +84,7 @@ function SignupForm() {
                 value={firstName}
                 onChange={handleOnChange}
                 placeholder="Enter first name"
-                className="w-full rounded-md bg-gray-800 p-3 text-white outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full rounded-md bg-gray-700 p-3 text-white outline-none focus:ring-2 focus:ring-yellow-400"
               />
             </label>
 
@@ -99,7 +99,7 @@ function SignupForm() {
                 value={lastName}
                 onChange={handleOnChange}
                 placeholder="Enter last name"
-                className="w-full rounded-md bg-gray-800 p-3 text-white outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full rounded-md bg-gray-700 p-3 text-white outline-none focus:ring-2 focus:ring-yellow-400"
               />
             </label>
           </div>
@@ -116,7 +116,7 @@ function SignupForm() {
               value={email}
               onChange={handleOnChange}
               placeholder="Enter email address"
-              className="w-full rounded-md bg-gray-800 p-3 text-white outline-none focus:ring-2 focus:ring-yellow-400"
+              className="w-full rounded-md bg-gray-700 p-3 text-white outline-none focus:ring-2 focus:ring-yellow-400"
             />
           </label>
 
@@ -133,7 +133,7 @@ function SignupForm() {
                 value={password}
                 onChange={handleOnChange}
                 placeholder="Enter Password"
-                className="w-full rounded-md bg-gray-800 p-3 pr-10 text-white outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full rounded-md bg-gray-700 p-3 pr-10 text-white outline-none focus:ring-2 focus:ring-yellow-400"
               />
               <span
                 onClick={() => setShowPassword((prev) => !prev)}
@@ -154,7 +154,7 @@ function SignupForm() {
                 value={confirmPassword}
                 onChange={handleOnChange}
                 placeholder="Confirm Password"
-                className="w-full rounded-md bg-gray-800 p-3 pr-10 text-white outline-none focus:ring-2 focus:ring-yellow-400"
+                className="w-full rounded-md bg-gray-700 p-3 pr-10 text-white outline-none focus:ring-2 focus:ring-yellow-400"
               />
               <span
                 onClick={() => setShowConfirmPassword((prev) => !prev)}

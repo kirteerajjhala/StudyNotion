@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaArrowRight } from "react-icons/fa";
-import { MdOutlineRateReview } from "react-icons/md";
 
 import HighlightText from "../components/core/HomePage/HighlightText";
 import CTAButton from "../components/core/HomePage/Button";
@@ -9,192 +7,192 @@ import CodeBlocks from "../components/core/HomePage/CodeBlock";
 import TimelineSection from "../components/core/HomePage/TimelineSection";
 import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
 import InstructorSection from "../components/core/HomePage/InstructorSection";
-import ExploreMore from "../components/core/HomePage/ExploreMore";
 import Footer from "../components/common/Footer";
+import ExploreMore from "../components/core/HomePage/ExploreMore";
 import ReviewSlider from "../components/common/ReviewSlider";
 
-// random bg images
-import bg1 from "../assets/Images/random bg img/coding bg1.jpg";
-import bg2 from "../assets/Images/random bg img/coding bg2.jpg";
-import bg3 from "../assets/Images/random bg img/coding bg3.jpg";
-import bg4 from "../assets/Images/random bg img/coding bg4.jpg";
-import bg5 from "../assets/Images/random bg img/coding bg5.jpg";
-import bg7 from "../assets/Images/random bg img/coding bg7.jpg";
-import bg8 from "../assets/Images/random bg img/coding bg8.jpeg";
-import bg9 from "../assets/Images/random bg img/coding bg9.jpg";
-import bg10 from "../assets/Images/random bg img/coding bg10.jpg";
-import bg11 from "../assets/Images/random bg img/coding bg11.jpg";
-import bg12 from "../assets/Images/random bg img/coding bg12.jpg";
-import bg13 from "../assets/Images/random bg img/coding bg13.jpg";
-import bg14 from "../assets/Images/random bg img/coding bg14.jpg";
-import bg15 from "../assets/Images/random bg img/coding bg15.jpg";
-import bg16 from "../assets/Images/random bg img/coding bg16.jpg";
-import bg17 from "../assets/Images/random bg img/1.jpg";
-import bg20 from "../assets/Images/random bg img/4.jpg";
-import bg21 from "../assets/Images/random bg img/5.jpg";
-import bg22 from "../assets/Images/random bg img/6.jpg";
-import bg23 from "../assets/Images/random bg img/7.jpg";
-import bg24 from "../assets/Images/random bg img/8.jpg";
-import bg25 from "../assets/Images/random bg img/9.jpg";
-import bg26 from "../assets/Images/random bg img/10.jpg";
+import { MdOutlineRateReview } from "react-icons/md";
+import { FaArrowRight } from "react-icons/fa";
 
-const images = [bg1,bg2,bg3,bg4,bg5,bg7,bg8,bg9,bg10,bg11,bg12,bg13,bg14,bg15,bg16,bg17,bg20,bg21,bg22,bg23,bg24,bg25,bg26];
+import { motion } from "framer-motion";
+import { fadeIn } from "../components/common/motionFrameVarients";
+
+// Random Background Images
+import backgroundImg1 from "../assets/Images/random bg img/coding bg1.jpg";
+import backgroundImg2 from "../assets/Images/random bg img/coding bg2.jpg";
+import backgroundImg3 from "../assets/Images/random bg img/coding bg3.jpg";
+import backgroundImg4 from "../assets/Images/random bg img/coding bg4.jpg";
+import backgroundImg5 from "../assets/Images/random bg img/coding bg5.jpg";
+import backgroundImg7 from "../assets/Images/random bg img/coding bg7.jpg";
+import backgroundImg8 from "../assets/Images/random bg img/coding bg8.jpeg";
+import backgroundImg9 from "../assets/Images/random bg img/coding bg9.jpg";
+import backgroundImg10 from "../assets/Images/random bg img/coding bg10.jpg";
+import backgroundImg11 from "../assets/Images/random bg img/coding bg11.jpg";
+
+import backgroundImg12 from "../assets/Images/random bg img/coding bg12.jpg";
+import backgroundImg13 from "../assets/Images/random bg img/coding bg13.jpg";
+import backgroundImg14 from "../assets/Images/random bg img/coding bg14.jpg";
+import backgroundImg15 from "../assets/Images/random bg img/coding bg15.jpg";
+import backgroundImg16 from "../assets/Images/random bg img/coding bg16.jpg";
+
+import backgroundImg17 from "../assets/Images/random bg img/1.jpg";
+import backgroundImg20 from "../assets/Images/random bg img/4.jpg";
+import backgroundImg21 from "../assets/Images/random bg img/5.jpg";
+import backgroundImg22 from "../assets/Images/random bg img/6.jpg";
+import backgroundImg23 from "../assets/Images/random bg img/7.jpg";
+import backgroundImg24 from "../assets/Images/random bg img/8.jpg";
+import backgroundImg25 from "../assets/Images/random bg img/9.jpg";
+import backgroundImg26 from "../assets/Images/random bg img/10.jpg";
+
+const randomImages = [
+  backgroundImg1, backgroundImg2, backgroundImg3, backgroundImg4, backgroundImg5,
+  backgroundImg7, backgroundImg8, backgroundImg9, backgroundImg10, backgroundImg11,
+  backgroundImg12, backgroundImg13, backgroundImg14, backgroundImg15, backgroundImg16,
+  backgroundImg17, backgroundImg20, backgroundImg21, backgroundImg22, backgroundImg23,
+  backgroundImg24, backgroundImg25, backgroundImg26,
+];
 
 const Home = () => {
   const [backgroundImg, setBackgroundImg] = useState(null);
 
   useEffect(() => {
-    const random = images[Math.floor(Math.random() * images.length)];
-    setBackgroundImg(random);
+    const bg = randomImages[Math.floor(Math.random() * randomImages.length)];
+    setBackgroundImg(bg);
   }, []);
 
   return (
-    <div className="overflow-x-hidden bg-richblack-900 text-white">
-      {/* Hero Section */}
-      <section
-        className="relative flex flex-col justify-center items-center text-white
-                   h-[480px] md:h-[640px] w-full bg-center bg-cover l overflow-hidden"
-        style={{
-          backgroundImage: `url(${backgroundImg})`,
-        }}
-      >
-        {/* glowing bottom gradient */}
-        <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-tr from-green-400/40 via-cyan-400/30 to-transparent blur-3xl"></div>
+    <div className="mt-20 overflow-hidden">
 
-        {/* top small button */}
-        <Link to="/signup" className="z-10">
-          <div className="group mx-auto rounded-full bg-[#161D29] text-richblack-200 font-bold transition-all duration-200 hover:scale-95 w-fit">
-            <div className="flex items-center gap-2 px-8 py-2 rounded-full transition-all duration-200 group-hover:bg-[#000814]">
-              <p>Become an Instructor</p>
-              <FaArrowRight />
+      {/* Hero Section */}
+      <div
+        className="relative w-full h-[500px] md:h-[640px] bg-center bg-cover  flex flex-col items-center justify-center text-white px-5 py-10 md:px-0"
+        style={{ backgroundImage: `url(${backgroundImg})` }}
+      >
+        <Link to="/signup">
+          <motion.div
+            whileHover={{ scale: 0.95 }}
+            className="group p-1 rounded-full bg-[#161D29] mt-10 md:mt-0 font-bold text-white transition-all duration-200 mb-4"
+          >
+            <div className="flex items-center gap-2 px-8  py-2 rounded-full transition-all duration-200 group-hover:bg-[#000814]">
+              Become an Instructor <FaArrowRight />
             </div>
-          </div>
+          </motion.div>
         </Link>
 
-        {/* main heading */}
-        <h1 className="z-10 mt-8 text-3xl sm:text-4xl lg:text-5xl font-semibold text-center px-4">
+        <motion.h1
+          variants={fadeIn("up", 0.2)}
+          initial="hidden"
+          animate="show"
+          className="text-3xl md:text-4xl font-semibold text-center"
+        >
           Empower Your Future with <HighlightText text="Coding Skills" />
-        </h1>
+        </motion.h1>
 
-        {/* sub text */}
-        <p className="z-10 mt-4 max-w-3xl text-center text-base sm:text-lg font-medium px-6">
-          Learn at your own pace from anywhere with access to projects,
-          quizzes, and feedback from top instructors around the world.
-        </p>
+        <motion.p
+          variants={fadeIn("up", 0.4)}
+          initial="hidden"
+          animate="show"
+          className="mt-4 max-w-3xl text-center text-base md:text-lg font-bold text-gray-200"
+        >
+          With our online coding courses, you can learn at your own pace, from anywhere in the world, and get access to hands-on projects, quizzes, and personalized feedback from instructors.
+        </motion.p>
 
-        {/* buttons */}
-        <div className="z-10 flex flex-col sm:flex-row gap-5 mt-8">
-          <CTAButton active={true} linkto="/signup">
-            Learn More
-          </CTAButton>
-          <CTAButton active={false} linkto="/login">
-            Book a Demo
-          </CTAButton>
-        </div>
-      </section>
+        <motion.div
+          variants={fadeIn("up", 0.6)}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col sm:flex-row gap-4 mt-6"
+        >
+          <CTAButton active={true} linkto="/signup">Learn More</CTAButton>
+          <CTAButton active={false} linkto="/login">Book a Demo</CTAButton>
+        </motion.div>
+      </div>
 
-      {/* Code Sections */}
-      <section className="relative w-11/12 mx-auto max-w-maxContent mt-16 flex flex-col gap-20 items-center">
+      {/* Code Blocks & Explore Section */}
+      <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center gap-16 mt-16">
+
         {/* Code Block 1 */}
-        <CodeBlocks
-          position="lg:flex-row"
-          heading={
-            <div className="text-3xl lg:text-4xl font-semibold">
-              Unlock Your <HighlightText text="coding potential " /> with our
-              online courses
-            </div>
-          }
-          subheading="Our courses are designed by experts who share real-world coding experience and guide you through hands-on practice."
-          ctabtn1={{
-            btnText: "Try it Yourself",
-            linkto: "/signup",
-            active: true,
-          }}
-          ctabtn2={{
-            btnText: "Learn More",
-            linkto: "/login",
-            active: false,
-          }}
-          codeblock={`<!DOCTYPE html>\n<html>\n<head><title>Example</title></head>\n<body>\n<h1><a href="/">Header</a></h1>\n<nav><a href="one/">One</a><a href="two/">Two</a><a href="three/">Three</a></nav>`}
-          codeColor="text-yellow-400"
-          backgroundGradient={"bg-red-700"}
-        />
+        <motion.div
+          variants={fadeIn("left", 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="w-full"
+        >
+          <CodeBlocks
+            position="lg:flex-row"
+            heading={<h2 className="text-3xl md:text-4xl font-semibold">Unlock Your <HighlightText text="coding potential" /> with our online courses</h2>}
+            subheading="Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
+            ctabtn1={{ btnText: "Try it Yourself", link: "/signup", active: true }}
+            ctabtn2={{ btnText: "Learn More", link: "/login", active: false }}
+            codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n</head>\n<body>\n<h1><a href="/">Header</a>\n</h1>\n<nav><a href="one/">One</a><a href="two/">Two</a><a href="three/">Three</a>\n</nav>`}
+            codeColor="text-yellow-400"
+            backgroundGradient="absolute w-[400px] h-[250px] rounded-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-700 via-orange-500 to-white opacity-30 blur-3xl"
+          />
+        </motion.div>
 
         {/* Code Block 2 */}
-        <CodeBlocks
-          position="lg:flex-row-reverse"
-          heading={
-            <div className="text-3xl lg:text-4xl font-semibold">
-              Start <HighlightText text="coding in seconds" />
-            </div>
-          }
-          subheading="Our hands-on environment lets you write and run real code from day one."
-          ctabtn1={{
-            btnText: "Continue Lesson",
-            linkto: "/signup",
-            active: true,
-          }}
-          ctabtn2={{
-            btnText: "Learn More",
-            linkto: "/login",
-            active: false,
-          }}
-          codeblock={`import React from "react";\nimport CTAButton from "./Button";\nimport { FaArrowRight } from "react-icons/fa";\n\nconst Home = () => <div>Home</div>;\nexport default Home;`}
-          codeColor="text-white"
-        />
+        <motion.div
+          variants={fadeIn("right", 0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="w-full"
+        >
+          <CodeBlocks
+            position="lg:flex-row-reverse"
+            heading={<h2 className="text-3xl md:text-4xl font-semibold">Start <HighlightText text="coding in seconds" /></h2>}
+            subheading="Go ahead, give it a try. Our hands-on learning environment means you'll be writing real code from your very first lesson."
+            ctabtn1={{ btnText: "Continue Lesson", link: "/signup", active: true }}
+            ctabtn2={{ btnText: "Learn More", link: "/signup", active: false }}
+            codeColor="text-white"
+            codeblock={`import React from "react";\nconst Home = () => {\n return <div>Home</div>;\n};\nexport default Home;`}
+            backgroundGradient="absolute w-[372px] h-[257px] rounded-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-400 via-teal-400 to-green-200 opacity-20 blur-3xl"
+          />
+        </motion.div>
 
         <ExploreMore />
-      </section>
+      </div>
 
-      {/* Skill Section */}
-      <section className="bg-white text-[#161D29] mt-16 py-10">
-        <div className="homepage_bg h-[310px]">
-          <div className="w-11/12 max-w-maxContent mx-auto flex flex-col items-center justify-center gap-5">
-            <div className="flex flex-col sm:flex-row gap-5 sm:gap-7 mt-20">
-              <CTAButton active={true} linkto="/signup">
-                <div className="flex items-center gap-3">
-                  Explore Full Catalog
-                  <FaArrowRight />
-                </div>
-              </CTAButton>
-              <CTAButton active={false} linkto="/signup">
-                Learn More
-              </CTAButton>
-            </div>
-          </div>
-        </div>
+      {/* Section 2 */}
+      <div className="bg-zinc-100 text-[#161D29] mt-20">
+        <div className="mx-auto max-w-maxContent w-11/12 flex flex-col items-center gap-10 py-20 ">
+          <motion.h2
+            variants={fadeIn("up", 0.2)}
+            initial="hidden"
+            whileInView="show"
+            className="text-3xl md:text-4xl font-semibold text-center mt-20"
+          >
+            Get the Skills you need for a <HighlightText text="Job that is in demand" />
+          </motion.h2>
 
-        <div className="mx-auto w-11/12 max-w-maxContent flex flex-col items-center gap-14 mt-14">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
-            <div className="text-3xl lg:text-4xl font-semibold w-full lg:w-[45%] text-center lg:text-left">
-              Get the Skills you need for a{" "}
-              <HighlightText text="Job that is in demand" />
-            </div>
+          <motion.p
+            variants={fadeIn("up", 0.4)}
+            initial="hidden"
+            whileInView="show"
+            className="text-center max-w-2xl text-base md:text-lg"
+          >
+            The modern StudyNotion dictates its own terms. Today, to be a competitive specialist requires more than professional skills.
+          </motion.p>
 
-            <div className="flex flex-col gap-6 w-full lg:w-[45%] items-center lg:items-start text-center lg:text-left">
-              <p className="text-base text-gray-700">
-                The modern world demands skills beyond degrees. Gain
-                professional knowledge that makes you truly employable.
-              </p>
-              <CTAButton active={true} linkto="/signup">
-                Learn More
-              </CTAButton>
-            </div>
-          </div>
+          <CTAButton active={true} linkto="/signup">Learn More</CTAButton>
 
           <TimelineSection />
           <LearningLanguageSection />
         </div>
-      </section>
+      </div>
 
-      {/* Instructor + Reviews */}
-      <section className="w-11/12 mx-auto max-w-maxContent mt-14 flex flex-col items-center text-white gap-12">
-        <InstructorSection />
-        <h1 className="text-center text-3xl lg:text-4xl font-semibold mt-8 flex justify-center items-center gap-x-3">
-          Reviews from other learners <MdOutlineRateReview className="text-yellow-25" />
-        </h1>
-        <ReviewSlider />
-      </section>
+      {/* Section 3 - Instructors & Reviews */}
+      <div className="bg-richblack-900 text-white py-20">
+        <div className="mx-auto max-w-maxContent w-11/12 flex flex-col gap-12">
+          <InstructorSection />
+
+          <h2 className="text-center text-3xl md:text-4xl font-semibold flex justify-center items-center gap-2">
+            Reviews from other learners <MdOutlineRateReview className="text-yellow-400" />
+          </h2>
+          <ReviewSlider />
+        </div>
+      </div>
 
       {/* Footer */}
       <Footer />

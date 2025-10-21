@@ -3,96 +3,73 @@ import CTAButton from "./Button";
 import { TypeAnimation } from "react-type-animation";
 import { FaArrowRight } from "react-icons/fa";
 
-const CodeBlock = ({
-    position,
+const CodeBlocks = ({
+    position = "lg:flex-row",
     heading,
     subheading,
     ctabtn1,
     ctabtn2,
     codeblock,
-    backgroundGradient,
-    codeColor,
+    backgroundGradient = "bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg",
+    codeColor = "text-yellow-500",
 }) => {
     return (
         <div className={`flex ${position} my-20 justify-between flex-col lg:gap-10 gap-10`}>
-
-
-            {/* Section 1  */}
-            <div className="w-[100%] lg:w-[50%] flex flex-col gap-8">
+            
+            {/* Section 1 - Text & Buttons */}
+            <div className="w-full lg:w-1/2 flex flex-col gap-8">
                 {heading}
-
-                {/* Sub Heading */}
-                <div className="text-[#838894] text-base font-bold w-[85%] -mt-3">
+                
+                <div className="text-gray-300 text-base font-bold w-11/12 -mt-3">
                     {subheading}
                 </div>
 
-                {/* Button Group */}
-                <div className="flex gap-7 mt-7">
-                    <CTAButton active={ctabtn1.active} linkto={ctabtn1.link}>
-                        <div className="flex items-center gap-2">
-                            {ctabtn1.btnText}
-                            <FaArrowRight />
-                        </div>
-                    </CTAButton>
-                    <CTAButton active={ctabtn2.active} linkto={ctabtn2.link}>
-                        {ctabtn2.btnText}
-                    </CTAButton>
+                <div className="flex gap-4 mt-6">
+                    {ctabtn1 && (
+                        <CTAButton active={ctabtn1.active} linkto={ctabtn1.link}>
+                            <div className="flex items-center gap-2">
+                                {ctabtn1.btnText}
+                                <FaArrowRight />
+                            </div>
+                        </CTAButton>
+                    )}
+                    {ctabtn2 && (
+                        <CTAButton active={ctabtn2.active} linkto={ctabtn2.link}>
+                            {ctabtn2.btnText}
+                        </CTAButton>
+                    )}
                 </div>
             </div>
 
-            {/* Section 2 */}
-            <div className="h-fit code-border border border-[#2C333F] rounded-xl flex flex-row py-3 text-[10px] sm:text-sm leading-[18px] sm:leading-6 relative w-[100%] lg:w-[470px]">
-
-                {/* Indexing */}
-                <div className="text-center flex flex-col  w-[10%] select-none  font-inter font-bold ">
-                    <p>1</p>
-                    <p>2</p>
-                    <p>3</p>
-                    <p>4</p>
-                    <p>5</p>
-                    <p>6</p>
-                    <p>7</p>
-                    <p>8</p>
-                    <p>9</p>
-                    <p>10</p>
-                    <p>11</p>
+            {/* Section 2 - Code Block */}
+            <div className="h-fit border border-gray-700 rounded-xl flex w-full lg:w-[470px] py-3 text-xs sm:text-sm leading-[18px] sm:leading-6 font-mono relative">
+                
+                {/* Line Numbers */}
+                <div className="text-center flex flex-col w-10 select-none text-gray-400 font-bold">
+                    {Array.from({ length: 11 }, (_, i) => (
+                        <p key={i}>{i + 1}</p>
+                    ))}
                 </div>
 
-                {/* Codes */}
-                <div
-                    className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-1`}
-                >
-                     <div className={`${backgroundGradient} bg-amber-800`}></div>
-
-                    {/* <TypeAnimation
-                        sequence={[codeblock, 1000, ""]}
-                        cursor={true}
+                {/* Code Content */}
+                <div className={`w-[90%] flex flex-col gap-2 pr-2 relative ${codeColor}`}>
+                    <div className={`${backgroundGradient} absolute w-full h-full `}></div>
+                    <TypeAnimation
+                        sequence={[codeblock, 2000, ""]}
                         repeat={Infinity}
+                        cursor={true}
                         style={{
                             whiteSpace: "pre-line",
                             display: "block",
+                            overflowX: "hidden",
+                            fontSize: "16px",
                         }}
                         omitDeletionAnimation={true}
-                    /> */}
-                     <TypeAnimation
-            sequence={[codeblock, 2000, ""]}
-            repeat={Infinity}
-            cursor={true}
-           
-            style = {
-                {
-                    whiteSpace: "pre-line",
-                    display:"block",
-                    overflowX:"hidden",
-                    fontSize:"16px",
-                }
-            }
-            omitDeletionAnimation={true}
-           />
+                    />
                 </div>
             </div>
         </div>
     );
 };
 
-export default CodeBlock;
+export default CodeBlocks;

@@ -6,7 +6,7 @@ export default function Cart() {
   const { total, totalItems } = useSelector((state) => state.cart);
 
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 py-6">
+    <div className="w-full px-4 sm:px-6 lg:px-8 py-6  mt-20">
       <h1 className="mb-8 text-3xl font-bold text-gray-100 text-center sm:text-left">
         Cart
       </h1>

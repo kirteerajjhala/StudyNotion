@@ -48,7 +48,7 @@ export async function buyCourse(token, coursesId, userDetails, navigate, dispatc
         }
 
         const RAZORPAY_KEY = import.meta.env.VITE_APP_RAZORPAY_KEY;
-        console.log("RAZORPAY_KEY...", RAZORPAY_KEY);
+        // console.log("RAZORPAY_KEY...", RAZORPAY_KEY);
 
         // options
         const options = {

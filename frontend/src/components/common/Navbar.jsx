@@ -99,16 +99,16 @@ const Navbar = () => {
                       <p className="text-center p-4 text-gray-700">Loading...</p>
                     ) : subLinks.length ? (
                       subLinks.map((subLink, i) => (
-                        <Link
-                          key={i}
-                          to={`/catalog/${subLink.name
-                            .split(" ")
-                            .join("-")
-                            .toLowerCase()}`}
-                          className="block w-full px-4 py-2 hover:bg-gray-100 rounded"
-                        >
-                          {subLink.name}
-                        </Link>
+                    <Link
+  key={i}
+  to={`/catalog/${subLink?.name
+    ? subLink.name.split(" ").join("-").toLowerCase()
+    : ""}`}
+  className="block w-full px-4 py-2 hover:bg-gray-100 rounded"
+>
+  {subLink?.name || "Unnamed"}
+</Link>
+
                       ))
                     ) : (
                       <p className="text-center p-4 text-gray-700">No Courses Found</p>
